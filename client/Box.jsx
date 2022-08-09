@@ -4,6 +4,7 @@ import backArrow from '../assets/icons8-back-100.png';
 import flipArrow from '../assets/icons8-rotate-100.png'
 import '../src/styles.scss'
 import Flashcard from "./Flashcard.jsx";
+import PopUp from './PopupGui.jsx'
 
 function Box(){
     const mockData = ['OOP','Callbacks','Recursion','Closure','Data Patterns','Semantic HTML','SASS'];
