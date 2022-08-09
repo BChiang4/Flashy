@@ -1,6 +1,0 @@
-controller = {};
-
-
-
-
-export default controller;
