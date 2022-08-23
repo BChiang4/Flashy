@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import forwardArrow from '../assets/icons8-forward-100.png';
 import backArrow from '../assets/icons8-back-100.png';
 import flipArrow from '../assets/icons8-rotate-100.png'
@@ -7,35 +7,54 @@ import Flashcard from "./Flashcard.jsx";
 import PopUp from './PopupGui.jsx'
 
 function Box(){
-    const mockData = ['OOP','Callbacks','Recursion','Closure','Data Patterns','Semantic HTML','SASS'];
+    
  
     // move the state of the flashcard to the upmost parent component
-    const [card,setCard] = useState(mockData[0]);
+    const [card,setCard] = useState('');
+    const [deck,setDeck] = useState([]);
 
+    useEffect(()=>{
+        // send a fetch request to the deckController router
+        (async ()=>{
+            const response = await fetch('http://localhost:3000/deck')
+            const flashDeck = await response.json();
+            setDeck(flashDeck);
+        })
+    },[deck])
+    
+    console.log(deck);
 
     const handleClickLeft = ()=>{
         // if you are currently at the card on the top of the stack, then go to the 
         // card at the end of the stack 
-        if(mockData.indexOf(card) === 0){
-            setCard(mockData[mockData.length-1])
+        if(deck.indexOf(card) === 0){
+            setCard(deck[deck.length-1])
         // else decrement the index of the stack 
         }else{
-            setCard(mockData[mockData.indexOf(card) - 1]);
+            setCard(deck[deck.indexOf(card) - 1]);
         }
     }
 
     const handleClickRight = ()=>{
         // implement the opposite logic for left click to the right click 
-        if(mockData.indexOf(card) === mockData.length-1){
-            setCard(mockData[0]);
+        if(deck.indexOf(card) === deck.length-1){
+            setCard(deck[0]);
         }else{
-           setCard(mockData[mockData.indexOf(card) + 1]) 
+           setCard(deck[deck.indexOf(card) + 1]) 
         }
     }
 
     const handleFlip = ()=>{
         console.log('flipping');
     }
+
+    // const handleAdd = async()=>{
+    //     const response = await fetch('http://localhost:8080/flashcard',{
+    //         method: 
+    //     })
+    // }
+
+
     return(
         <div className='Box'>
             <div className='addCard'>
@@ -44,6 +63,7 @@ function Box(){
             <div className='deleteCard'>
                 <button>Delete Card</button>
             </div>
+            {/* <PopUp trigger={false}>My Popup</PopUp> */}
             <div className='Flashcard'>
               <Flashcard currCard={card}/>  
             </div>

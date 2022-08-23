@@ -1,11 +1,14 @@
 const express = require('express');
 const path = require('path');
-const app = express.Router();
+const app = express();
 const PORT = 3000;
 const flashcardRouter = require('./routers/flashcardRouter');
-
+const deckRouter = require('./routers/deckRouter');
 
 app.use('/flashcard', flashcardRouter);
+
+app.use('/deck', deckRouter);
+
 
 app.get('/',(req,res)=>{
     res.sendFile(path.join(__dirname,'../src/index.html'));

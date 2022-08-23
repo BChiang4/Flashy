@@ -4,11 +4,11 @@ const pg = require('../model/dbModel.js');
 const flashcardController = {};
 // read the flashcard 
 flashcardController.readCard = (req,res,next) => {
-    const queryString = ``
-
+    const queryString = `SELECT * FROM DECKS WHERE ID`
+    
     pg.query(queryString)
     .then(data=>{
-        res.locals.cardInfo = data;
+        res.locals.cardInfo = data.rows;
         return next();
     })
     .catch((err)=>{
@@ -26,10 +26,5 @@ flashcardController.readCard = (req,res,next) => {
 module.exports = flashcardController;
 
 
-
-
-
-
-export default flashcardController;
 
 
