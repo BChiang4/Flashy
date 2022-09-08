@@ -34,6 +34,13 @@ module.exports = {
             },
         ]
     },
+    devServer:{
+        static: path.resolve('dist'),
+        port: 8080,
+        proxy: {
+            '/': 'http://localhost:3000'
+        },
+    },
     plugins: [
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'src','index.html')

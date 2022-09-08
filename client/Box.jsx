@@ -7,23 +7,26 @@ import Flashcard from "./Flashcard.jsx";
 import PopUp from './PopupGui.jsx'
 
 function Box(){
-    
- 
     // move the state of the flashcard to the upmost parent component
     const [card,setCard] = useState('');
     const [deck,setDeck] = useState([]);
 
-    useEffect(()=>{
-        // send a fetch request to the deckController router
-        (async ()=>{
-            const response = await fetch('http://localhost:3000/deck')
-            const flashDeck = await response.json();
-            setDeck(flashDeck);
-        })
-    },[deck])
-    
-    console.log(deck);
+    // useEffect(()=>{
+    //     (async ()=>{
+    //         try{
+    //             const response = await fetch('http://localhost:3000/deck')
+    //             const cardDeck = await response.json();
+    //             setDeck(cardDeck);
+    //             // setCard(deck[0].key)
+    //         }catch(err){
+    //             console.log('Err occured when fetching card deck');
+    //         }
+    //     })();
+    // },[]);
 
+
+    // console.log(deck[0].key);
+    console.log(deck[0]);
     const handleClickLeft = ()=>{
         // if you are currently at the card on the top of the stack, then go to the 
         // card at the end of the stack 

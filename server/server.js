@@ -3,11 +3,14 @@ const path = require('path');
 const app = express();
 const PORT = 3000;
 const flashcardRouter = require('./routers/flashcardRouter');
-const deckRouter = require('./routers/deckRouter');
+const deckRouter = require('./routers/deckRouter.js');
+const collectionsRouter = require('./routers/collectionsRouter.js')
 
 app.use('/flashcard', flashcardRouter);
 
 app.use('/deck', deckRouter);
+
+app.use('/collections', collectionsRouter);
 
 
 app.get('/',(req,res)=>{
