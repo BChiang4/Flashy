@@ -4,7 +4,11 @@ const collectionsController = require('../controllers/collectionsController');
 
 
 router.post('/updateCollections', collectionsController.updateCollections, (req,res)=>{
-    console.log('testing');
+    res.sendStatus(200).json(res.locals.data);
+})
+
+router.get('/readCollections', collectionsController.readCollections, (req,res)=>{
+    res.status(200).json(res.locals.data);
 })
 
 

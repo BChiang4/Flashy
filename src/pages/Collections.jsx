@@ -5,34 +5,44 @@ function Collections(){
     const [add,setAdd] = useState(false);
 
     useEffect(()=>{
+        console.log('useEffect');
         // when the collections component is mounted onto the DOM 
             // send a fetch request to the server to query all collections inside the Collections table 
-
-            // after the response is send back from the server, parse the response with json 
-                // update state with the response 
-    },[list])
+            fetch('/collections/readCollections')
+            .then(data => data.json())
+            .then((response)=>{
+                setList(response)
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+    },[])
+    
     
     /* functionality that handles adding to the collection*/
     const handleClickForm = ()=>{
         setAdd(!add);
     }
 
-    const onSubmit = async (e)=>{
+    const onSubmit = (e)=>{
         e.preventDefault();
         // fetch request to back end
-           const response = await fetch('/collections/updateCollections',{
+        const data = {collectionName : e.target.collectionName.value}
+            
+        fetch('/collections/updateCollections',{
                 method: 'POST',
                 headers: {
                     'Content-Type' : 'application/json',
                 },
-                body: JSON.stringify({
-                    'word': e.target.word.value,
-                    'definition': e.target.definition.value
-                })
+                body: JSON.stringify(data)
            })
-
-           const updatedResponse = await response.json();
-           setList(updatedResponse);
+           .then(data => data.json())
+        //    .then((response)=>{
+        //     setList(response);
+        //    })
+           .catch((err)=>{
+                console.log(err)
+           })
     }
     
     return(
@@ -45,10 +55,8 @@ function Collections(){
                 add ? (
                 
                       <form onSubmit={onSubmit}>
-                        <label for='word'>Enter Word</label>
-                        <input type='text' name='word' id='name' required/>
-                        <label for='definition'>Enter Definition</label>
-                        <input type='text' name='definition' id='definition' required/>
+                        <label htmlFor='collectionName'>Collection Name</label>
+                        <input type='text' name='collectionName' id='name' required/>
                         <input type='submit' value='ADD!'/>
                     </form>        
                 ) : (
@@ -56,7 +64,10 @@ function Collections(){
                 )
             }
             <ul>
-
+                {list.map((list,index)=>{
+                    return <li key={index}><a href=''>{list.name}</a><button>X</button></li>
+                })
+                }
             </ul>
         </>  
     )

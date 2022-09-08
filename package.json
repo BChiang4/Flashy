@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js",
-    "dev": "concurrently \"webpack serve\" \"npm start\"",
+    "dev": "concurrently \"webpack serve\" \"nodemon server/server.js\"",
     "build": "webpack"
   },
   "author": "",
@@ -30,6 +30,7 @@
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "node-sass": "^7.0.1",
+    "nodemon": "^2.0.19",
     "react-router-dom": "^6.3.0",
     "sass-loader": "^13.0.2",
     "style-loader": "^3.3.1",

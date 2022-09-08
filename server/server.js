@@ -6,10 +6,12 @@ const flashcardRouter = require('./routers/flashcardRouter');
 const deckRouter = require('./routers/deckRouter.js');
 const collectionsRouter = require('./routers/collectionsRouter.js')
 
+// body parser
+app.use(express.json());
+
+// Router handling
 app.use('/flashcard', flashcardRouter);
-
 app.use('/deck', deckRouter);
-
 app.use('/collections', collectionsRouter);
 
 
